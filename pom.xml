@@ -38,6 +38,8 @@
           <source>${java.version}</source>
           <target>${java.version}</target>
           <encoding>UTF-8</encoding>
+          <verbose>true</verbose>
+          <showWarnings>true</showWarnings>
         </configuration>
       </plugin>
     </plugins>
