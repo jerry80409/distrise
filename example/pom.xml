@@ -7,10 +7,10 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>nostr-ws</artifactId>
+  <artifactId>example</artifactId>
   <packaging>jar</packaging>
 
-  <name>nostr-ws</name>
+  <name>example</name>
 
   <dependencies>
     <dependency>
@@ -20,15 +20,10 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.java-websocket</groupId>
-      <artifactId>Java-WebSocket</artifactId>
-      <version>${java-websocket.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-      </exclusions>
+      <groupId>com.github.jerry80409</groupId>
+      <artifactId>nostr-ws</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 
@@ -36,5 +31,20 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>UTF-8</encoding>
+          <verbose>true</verbose>
+          <showWarnings>true</showWarnings>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

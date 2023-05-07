@@ -8,6 +8,7 @@
   <modules>
     <module>nostr-event</module>
     <module>nostr-ws</module>
+    <module>example</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -33,12 +34,16 @@
   </properties>
 
   <dependencies>
-<!--    <dependency>-->
-<!--      <groupId>org.bouncycastle</groupId>-->
-<!--      <artifactId>bcprov-jdk15on</artifactId>-->
-<!--      <version>${bcprov.version}</version>-->
-<!--    </dependency>-->
-<!--    -->
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+      <version>${bcprov.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback-classic.version}</version>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
@@ -64,16 +69,6 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>${google.guava.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>${logback-classic.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.java-websocket</groupId>
-        <artifactId>Java-WebSocket</artifactId>
-        <version>${java-websocket.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -27,19 +27,21 @@ public record Event(
   @JsonProperty("kind") int kind,
   @JsonProperty("tags") List<String> tags,
   @JsonProperty("content") String content,
-  @JsonProperty("sig") String sig) {
+  @JsonProperty("sig") String sig) implements IEvent {
 
-  // update event id
-  public Event updateEventId() throws JsonProcessingException {
-    final String id = EventId.builder().id(0).pubkey(pubkey).createdAt(createdAt).kind(kind).tags(tags).content(content)
+
+  public String getHexSha256Id() throws JsonProcessingException {
+    return EventId.builder()
+      .id(0)
+      .pubkey(pubkey)
+      .createdAt(createdAt)
+      .kind(kind)
+      .tags(tags)
+      .content(content)
       .build().hexSha256Serialize();
-
-    return Event.builder()
-      .id(id).pubkey(pubkey).createdAt(createdAt).kind(kind).tags(tags).content(content)
-      .build();
   }
 
-//  public Event signature(ECKeyPair keyPair) throws JsonProcessingException {
+  //  public Event signature(ECKeyPair keyPair) throws JsonProcessingException {
 //    final String id = EventId.builder().id(0).pubkey(pubkey).createdAt(createdAt).kind(kind).tags(tags)
 //      .content(content).build().hexSha256Serialize();
 //

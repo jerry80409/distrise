@@ -28,6 +28,7 @@
       <artifactId>guava</artifactId>
       <version>${google.guava.version}</version>
     </dependency>
+
   </dependencies>
 
 </project>

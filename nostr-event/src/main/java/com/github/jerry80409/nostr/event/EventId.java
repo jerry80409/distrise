@@ -22,20 +22,22 @@ record EventId(
   @JsonProperty("created_at") Long createdAt,
   @JsonProperty("kind") int kind,
   @JsonProperty("tags") List<String> tags,
-  @JsonProperty("content") String content) {
+  @JsonProperty("content") String content) implements IEvent {
 
   // json
-  byte[] serialize() throws JsonProcessingException {
-    return Tools.JSON_MAPPER.writeValueAsString(this).getBytes(UTF_8);
+  public byte[] serialize() throws JsonProcessingException {
+    return Tools.JSON_MAPPER.writeValueAsString(this)
+//      .replace("\"", "'") // should I replace?, because java json always with double quote.
+      .getBytes(UTF_8);
   }
 
   // sha256
-  byte[] sha256Serialize() throws JsonProcessingException {
-    return Hashing.sha256().hashString(Tools.JSON_MAPPER.writeValueAsString(this), UTF_8).asBytes();
+  public byte[] sha256Serialize() throws JsonProcessingException {
+    return Hashing.sha256().hashBytes(serialize()).asBytes();
   }
 
   // hex string
-  String hexSha256Serialize() throws JsonProcessingException {
+  public String hexSha256Serialize() throws JsonProcessingException {
     return new BigInteger(1, sha256Serialize()).toString(16);
   }
 }
