@@ -1,5 +1,6 @@
 package com.github.jerry80409.nostr.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,6 +31,7 @@ public record Event(
   @JsonProperty("sig") String sig) implements IEvent {
 
 
+  @JsonIgnore
   public String getHexSha256Id() throws JsonProcessingException {
     return EventId.builder()
       .id(0)
@@ -40,13 +42,4 @@ public record Event(
       .content(content)
       .build().hexSha256Serialize();
   }
-
-  //  public Event signature(ECKeyPair keyPair) throws JsonProcessingException {
-//    final String id = EventId.builder().id(0).pubkey(pubkey).createdAt(createdAt).kind(kind).tags(tags)
-//      .content(content).build().hexSha256Serialize();
-//
-//    final String sig = Sign.signMessage(id.getBytes(UTF_8), keyPair).toString();
-//
-//    return null;
-//  }
 }

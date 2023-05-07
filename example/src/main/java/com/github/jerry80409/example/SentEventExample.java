@@ -1,6 +1,7 @@
 package com.github.jerry80409.example;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.time.ZoneOffset.UTC;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +17,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -52,7 +55,7 @@ public class SentEventExample {
 
     // fixme - not same with the Relay hexSha256Id fields
     // event.id
-    final String id = Event.builder().pubkey(pubkey).createdAt(1683455608L).kind(1)
+    final String id = Event.builder().pubkey(pubkey).createdAt(LocalDateTime.now().toEpochSecond(UTC)).kind(1)
       .tags(List.of()).content(msg).build().getHexSha256Id();
 
     // sig, jsut try error with good luck XD.
@@ -60,8 +63,8 @@ public class SentEventExample {
     final String hexSig = new BigInteger(1, sig).toString(16);
 
     list.add(
-      Event.builder().id(id).pubkey(pubkey).createdAt(1683455608L).kind(1).tags(List.of())
-        .content("from jerry").sig(hexSig).build());
+      Event.builder().id(id).pubkey(pubkey).createdAt(LocalDateTime.now().toEpochSecond(UTC)).kind(1).tags(List.of())
+        .content(msg).sig(hexSig).build());
 
     final String payload = JSON_MAPPER.writeValueAsString(list);
     log.debug("nostr client send payload: {}", payload);

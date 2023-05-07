@@ -8,8 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.hash.Hashing;
 import java.math.BigInteger;
+import java.util.HexFormat;
 import java.util.List;
 import lombok.Builder;
+import org.bouncycastle.util.encoders.HexEncoder;
 
 /**
  * because the id is integer not same as {@link Event} fields.
@@ -26,9 +28,7 @@ record EventId(
 
   // json
   public byte[] serialize() throws JsonProcessingException {
-    return Tools.JSON_MAPPER.writeValueAsString(this)
-//      .replace("\"", "'") // should I replace?, because java json always with double quote.
-      .getBytes(UTF_8);
+    return Tools.JSON_MAPPER.writeValueAsString(this).getBytes(UTF_8);
   }
 
   // sha256

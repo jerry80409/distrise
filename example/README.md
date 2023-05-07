@@ -5,7 +5,8 @@
 
 ### What are some of the challenges you faced while working on Phase 1?
 - [x] I learned how to used WebSocket client and also know how to build the server.
-- [ ] but I not sure why my `Even.id` was diff from the Relay `hexSha256id`.
+- [x] also learned Java Record, because Java it's hard to serialize json like python Tuples, so I try the Record and 
+  testing it's ok.
 - [ ] and I sign the data very sloppy XD.
 - [ ] the biggest challenge is that I don't really understand Crypto, so I try error many times and read a lot of 
   example code still has a bad learning.
