@@ -43,6 +43,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
+    <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+
   </properties>
 
   <build>
@@ -57,6 +60,37 @@
           <encoding>UTF-8</encoding>
           <verbose>true</verbose>
           <showWarnings>true</showWarnings>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${maven-dependency-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>com.github.jerry80409.example.SentEventExample</mainClass>
+            </manifest>
+          </archive>
         </configuration>
       </plugin>
     </plugins>
