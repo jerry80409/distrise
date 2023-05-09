@@ -8,10 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.hash.Hashing;
 import java.math.BigInteger;
-import java.util.HexFormat;
 import java.util.List;
 import lombok.Builder;
-import org.bouncycastle.util.encoders.HexEncoder;
 
 /**
  * because the id is integer not same as {@link Event} fields.
@@ -22,7 +20,7 @@ record EventId(
   @JsonProperty("id") int id,
   @JsonProperty("pubkey") String pubkey,
   @JsonProperty("created_at") Long createdAt,
-  @JsonProperty("kind") int kind,
+  @JsonProperty("kind") EventKind kind,
   @JsonProperty("tags") List<String> tags,
   @JsonProperty("content") String content) implements IEvent {
 

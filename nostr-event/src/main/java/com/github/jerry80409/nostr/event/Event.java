@@ -25,7 +25,7 @@ public record Event(
   @JsonProperty("id") String id,
   @JsonProperty("pubkey") String pubkey,
   @JsonProperty("created_at") Long createdAt,
-  @JsonProperty("kind") int kind,
+  @JsonProperty("kind") EventKind kind,
   @JsonProperty("tags") List<String> tags,
   @JsonProperty("content") String content,
   @JsonProperty("sig") String sig) implements IEvent {
