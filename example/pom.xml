@@ -25,6 +25,20 @@
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+
+    <!-- Looks easier to use  -->
+    <dependency>
+      <groupId>org.web3j</groupId>
+      <artifactId>crypto</artifactId>
+      <version>5.0.0</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
   </dependencies>
 
   <properties>
