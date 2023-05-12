@@ -1,11 +1,11 @@
-package rise.distrise.nostr;
+package rise.distrise.nostr.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import rise.distrise.nostr.event.Nevent;
-import rise.distrise.nostr.event.NeventType;
-import rise.distrise.nostr.event.Nkind;
-import rise.distrise.nostr.request.EventRequest;
+import rise.distrise.nostr.core.event.Nevent;
+import rise.distrise.nostr.core.event.NeventType;
+import rise.distrise.nostr.core.event.Nkind;
+import rise.distrise.nostr.core.request.EventRequest;
 import com.google.common.base.Strings;
 import java.net.URI;
 import java.time.LocalDateTime;

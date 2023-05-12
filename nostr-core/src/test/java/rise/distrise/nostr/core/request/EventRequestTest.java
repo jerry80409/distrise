@@ -1,10 +1,10 @@
-package rise.distrise.nostr.request;
+package rise.distrise.nostr.core.request;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import rise.distrise.nostr.event.Nevent;
-import rise.distrise.nostr.event.NeventType;
-import rise.distrise.nostr.event.Nkind;
+import rise.distrise.nostr.core.event.Nevent;
+import rise.distrise.nostr.core.event.NeventType;
+import rise.distrise.nostr.core.event.Nkind;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;

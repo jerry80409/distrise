@@ -1,4 +1,4 @@
-package rise.distrise.nostr.event;
+package rise.distrise.nostr.core.event;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
