@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import lombok.Builder;
 
-// todo - 用 record 開發很快, 但不能繼承擴充欄位很麻煩, 考慮改為 pojo 的方式
+// todo - 用 record 開發很快, 但不能繼承擴充欄位很麻煩, 可能考慮改為 pojo 的方式
 /**
  * 暫時先當所有 event 的使用入口, 用來為各種 Event 的工廠模式.
  *

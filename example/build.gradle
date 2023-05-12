@@ -1,0 +1,31 @@
+plugins {
+  id 'java-library'
+  id 'application'
+}
+
+dependencies {
+  implementation project(':nostr-core')
+
+  // 有 CVE-2022-45688, CVE-2020-15250 風險
+  implementation 'org.java-websocket:Java-WebSocket:1.5.3'
+}
+
+sourceCompatibility = 17
+targetCompatibility = 17
+
+application {
+  // 定義可執行文件的名稱和描述
+  mainClassName = 'com.github.jerry80409.SendEventExample'
+  applicationName = 'Sent Nostr Event Example'
+}
+
+jar {
+  // 定義 JAR 文件的名稱和描述
+  archiveName = 'example-send-event.jar'
+  manifest {
+    attributes(
+      'Main-Class': 'com.github.jerry80409.SendEventExample',
+      'Class-Path': configurations.runtimeClasspath.files.collect { "lib/$it.name" }.join(' ')
+    )
+  }
+}
