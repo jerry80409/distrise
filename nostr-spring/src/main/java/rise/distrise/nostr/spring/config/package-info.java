@@ -1,0 +1,1 @@
+package rise.distrise.nostr.spring.config;
