@@ -4,17 +4,24 @@ import static java.time.ZoneOffset.UTC;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializable;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import lombok.Builder;
 
+// todo - 用 record 開發很快, 但不能繼承擴充欄位很麻煩, 考慮改為 pojo 的方式
+/**
+ * 暫時先當所有 event 的使用入口, 用來為各種 Event 的工廠模式.
+ *
+ * @param id
+ * @param pubkey
+ * @param createdAt
+ * @param kind
+ * @param tags
+ * @param content
+ * @param sig
+ */
 @Builder
 public record Nevent(
   @JsonProperty("id") NeventId id,
@@ -37,6 +44,9 @@ public record Nevent(
     return this;
   }
 
+  /**
+   * 取得 eventId
+   */
   @JsonIgnore
   public NeventId getEventId() {
     return NeventId.builder().zero(0).pubkey(pubkey).createdAt(createdAt).tags(tags).kind(kind)
