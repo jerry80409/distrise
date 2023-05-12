@@ -1,1 +1,5 @@
 rootProject.name = 'distrise'
+include 'nostr-ws'
+include 'nostr-core'
+include 'example'
+

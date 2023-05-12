@@ -1,19 +1,109 @@
 plugins {
-    id 'java'
+  id 'java'
+  id 'io.spring.dependency-management' version '1.1.0'
 }
 
+// project metadata
 group 'com.github.jerry80409'
 version '1.0-SNAPSHOT'
+description 'Mini Project implemented NOSTR protocol.'
 
-repositories {
+// compiler version
+sourceCompatibility = '17'
+
+// properties
+
+
+// as the maven dependencyManagement
+dependencyManagement {
+  dependencies {
+    dependency 'org.bouncycastle:bcprov-jdk15on:1.70'
+  }
+}
+
+// all suproject setting
+subprojects {
+  if (name != rootProject.name) {
+    rootProject.subprojects.add(project)
+  }
+  apply plugin: 'java'
+
+  // properties
+  version=rootProject.version
+  group=rootProject.gradle
+  sourceCompatibility = rootProject.sourceCompatibility
+
+  repositories {
     mavenCentral()
-}
+  }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
+  dependencies {
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'ch.qos.logback:logback-classic:1.4.7'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+    implementation 'org.projectlombok:lombok:1.18.26'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
+  }
 
-test {
+  test {
     useJUnitPlatform()
+  }
+
+  // configure the Maven-like project structure
+  sourceSets {
+    main {
+      java {
+        srcDirs = ['src/main/java']
+      }
+    }
+    test {
+      java {
+        srcDirs = ['src/test/java']
+      }
+    }
+  }
+
+  // configure the Maven-like build
+  jar {
+    manifest {
+      attributes 'Implementation-Title': project.name,
+        'Implementation-Version': project.version,
+        'Main-Class': 'com.example.Main'
+    }
+  }
 }
+
+// define the root project's modules
+def modules = ['nostr-core', 'nostr-ws']
+
+// create a project for each module
+//modules.each { moduleName ->
+//  project(moduleName) {
+//    // set the module's name and parent
+//    name = moduleName
+//    parent = rootProject
+//
+//    // configure the Maven-like project structure
+//    sourceSets {
+//      main {
+//        java {
+//          srcDirs = ['src/main/java']
+//        }
+//      }
+//      test {
+//        java {
+//          srcDirs = ['src/test/java']
+//        }
+//      }
+//    }
+//
+//    // configure the Maven-like build
+//    jar {
+//      manifest {
+//        attributes 'Implementation-Title': project.name,
+//          'Implementation-Version': project.version,
+//          'Main-Class': 'com.example.Main'
+//      }
+//    }
+//  }
+//}
