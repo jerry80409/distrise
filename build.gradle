@@ -5,7 +5,7 @@ plugins {
 
 allprojects {
   // project metadata
-  group 'com.github.jerry80409'
+  group 'rise.distrise.nostr'
   version '1.0-SNAPSHOT'
   description 'Mini Project implemented NOSTR protocol.'
 
