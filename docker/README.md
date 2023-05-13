@@ -1,15 +1,15 @@
 # Docker Compose
 
 ## Required
-* 需要事先安裝 docker
-* 需要事先安裝 docker-compose
+* Setup the docker
+* Setup the docker-compose
 
 ## QuickStart
-簡單地按照官方頁面的 Docker Run 改寫了 [docker-compose.yaml](./docker-compose.yaml), 因為只是開發用的, 所以我只跑了 single node, 且沒有任何安全防護 
-(--insecure), 所以別用在正式環境上.
+I just follow the cockroach page and writing the [docker-compose.yaml](./docker-compose.yaml) to quick run the sing 
+node cockroachDB on local, it's run insecure (--insecure), so please don't run it on production environment.
 
 ```shell
-# 可能要先 docker login 才能下載 docker image
+# should docker login, than you can download the docker image
 docker login
 docker-compose up
 ```
@@ -18,7 +18,7 @@ docker-compose up
 * open browser: http://localhost:8080
 ![console](../doc/cockroach-console.png)
 
-### docker-compose 更多指令參考
+### docker-compose command ref
 | Command                  | Description                                                      |
 |--------------------------|------------------------------------------------------------------|
 | `docker-compose`         | Docker-compose main command                                      |
