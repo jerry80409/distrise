@@ -16,7 +16,7 @@ services:
     # 26257 為 db 連線的 port
     ports:
       - "26257:26257"
-      - "8080:8080"
+      - "8081:8080"
 
     # 簡單宣告 docker volumes 給 cockroach 使用
     # 若有 entrypoint 腳本, 可在 docker-compose.yaml 目錄底下建立 init-scripts 目錄

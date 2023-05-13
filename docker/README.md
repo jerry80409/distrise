@@ -15,7 +15,7 @@ docker-compose up
 ```
 
 ### Cockroach web console
-* open browser: http://localhost:8080
+* open browser: http://localhost:8081
 ![console](../doc/cockroach-console.png)
 
 ### docker-compose command ref
