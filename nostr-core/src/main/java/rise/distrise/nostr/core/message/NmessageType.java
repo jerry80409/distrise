@@ -8,5 +8,7 @@ public enum NmessageType {
 
   // server side
   EOSE,
+
+  // when error occurred
   NOTICE,
 }
