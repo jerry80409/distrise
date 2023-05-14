@@ -1,4 +1,4 @@
-package rise.distrise.nostr.core.event;
+package rise.distrise.nostr.core;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
-package rise.distrise.nostr.core.event;
+package rise.distrise.nostr.core.message.event;
 
 import static java.time.ZoneOffset.UTC;
+import static rise.distrise.nostr.core.utils.JsonUtils.JSON;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializable;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
+import rise.distrise.nostr.core.Nkind;
 
 @Builder
 public record NeventId(
@@ -21,12 +22,7 @@ public record NeventId(
   LocalDateTime createdAt,
   Nkind kind,
   List<List<String>> tags,
-  String content) implements NeventItem, JsonSerializable {
-
-  @JsonIgnore
-  public String getSha256() throws JsonProcessingException {
-    return Hashing.sha256().hashBytes(MAPPER.writeValueAsBytes(this)).toString();
-  }
+  String content) implements JsonSerializable {
 
   @Override
   public void serialize(JsonGenerator gen, SerializerProvider serializers) throws IOException {
@@ -37,5 +33,15 @@ public record NeventId(
   public void serializeWithType(JsonGenerator gen, SerializerProvider serializers, TypeSerializer typeSer)
     throws IOException {
     // do nothing
+  }
+
+  /**
+   * Sha256 hashing
+   *
+   * @return sha256 string
+   * @throws JsonProcessingException json serialize error.
+   */
+  public String toSha256String() throws JsonProcessingException {
+    return Hashing.sha256().hashBytes(JSON.writeValueAsBytes(this)).toString();
   }
 }

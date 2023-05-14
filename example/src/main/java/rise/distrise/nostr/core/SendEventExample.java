@@ -3,16 +3,15 @@ package rise.distrise.nostr.core;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
+import java.math.BigInteger;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.framing.CloseFrame;
-import rise.distrise.nostr.core.event.Nevent;
-import rise.distrise.nostr.core.event.NeventType;
-import rise.distrise.nostr.core.event.Nkind;
-import rise.distrise.nostr.core.request.EventRequest;
+import rise.distrise.nostr.core.message.event.EventMessage;
+import rise.distrise.nostr.core.message.event.Nevent;
 
 // session 1 homework
 @Slf4j
@@ -34,21 +33,21 @@ public class SendEventExample {
     }
 
     // request
-    final EventRequest request = new EventRequest();
-    request.add(NeventType.EVENT);
-    request.add(Nevent.builder()
-        .pubkey(pubkey)
-        .createdAt(LocalDateTime.now())
-        .tags(List.of(List.of()))
-        .kind(Nkind.SET_METADATA)
-        .sig("jlkjlkjlkjlkjlkjalsdfasdfasdf")
-      .content(MSG).build().updateId().getNeventMsg());
+    final EventMessage message = new EventMessage(Nevent.builder()
+      .pubkey(pubkey)
+      .createdAt(LocalDateTime.now())
+      .kind(Nkind.SET_METADATA)
+      .tags(List.of(List.of()))
+      .content(MSG)
+      .sig(new BigInteger(pubkey, 16).toString())
+      .build()
+    );
 
-    final String json = JSON_MAPPER.writeValueAsString(request);
+    final String json = JSON_MAPPER.writeValueAsString(message);
 
     // websocket send event
     // websocket send event to Relay
-    final WsClient wsClient = new WsClient(URI.create(LOCAL_HOST_RELAY));
+    final WsClient wsClient = new WsClient(URI.create(DUMMY_RELAY));
     log.info("Client connecting...");
     wsClient.connectBlocking(3, TimeUnit.SECONDS);
     log.info("Client connecting success");
