@@ -24,6 +24,8 @@ public class SendEventExample {
 
   private static final String DUMMY_RELAY = "wss://relay.nekolicio.us/";
 
+  private static final String LOCAL_HOST_RELAY = "ws://localhost:8080/distrise/jerry";
+
   private static final String MSG = "Greeting form Jerry";
 
   public static void main(String[] args) throws JsonProcessingException, InterruptedException {
@@ -48,7 +50,7 @@ public class SendEventExample {
 
     // websocket send event
     // websocket send event to Relay
-    final WsClient wsClient = new WsClient(URI.create(DUMMY_RELAY));
+    final WsClient wsClient = new WsClient(URI.create(LOCAL_HOST_RELAY));
     log.info("Client connecting...");
     wsClient.connectBlocking(3, TimeUnit.SECONDS);
     log.info("Client connecting success");

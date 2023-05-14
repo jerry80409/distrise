@@ -36,6 +36,8 @@ dependencies {
 
   implementation 'org.hibernate:hibernate-core:6.2.2.Final'
 
+  implementation 'net.ttddyy:datasource-proxy:1.4.1'
+
 }
 
 tasks.named('test') {

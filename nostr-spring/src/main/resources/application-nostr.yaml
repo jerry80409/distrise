@@ -1,0 +1,3 @@
+nostr:
+  enabled: true
+  path: '/distrise/jerry'
