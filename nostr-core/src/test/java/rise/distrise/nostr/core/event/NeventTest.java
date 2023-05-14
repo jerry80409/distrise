@@ -44,7 +44,7 @@ class NeventTest {
     // step2
     final Nevent eventWithId = event.updateId();
     // step3
-    final Nevent01 nip01Event = eventWithId.getNevent01();
+    final NeventMsg nip01Event = eventWithId.getNeventMsg();
 
     Assertions.assertThat(nip01Event).isNotNull()
       .hasFieldOrPropertyWithValue("id", "7cfce126a9d82a6dd9756e9b0bad8d142698ab8e21b20347813512d55b42c32a")

@@ -25,7 +25,7 @@ class EventRequestTest {
     final EventRequest request = new EventRequest();
     request.add(NeventType.EVENT);
     request.add(Nevent.builder().pubkey(pubkey).createdAt(timestamp).kind(kind).tags(tags)
-      .content(content).build().updateId().getNevent01());
+      .content(content).build().updateId().getNeventMsg());
 
     final String json = MAPPER.writeValueAsString(request);
     Assertions.assertEquals("[\"EVENT\",{\"id\":\"7cfce126a9d82a6dd9756e9b0bad8d142698ab8e21b20347813512d55b42c32a\","

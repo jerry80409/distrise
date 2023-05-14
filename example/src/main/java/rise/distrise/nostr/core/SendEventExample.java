@@ -42,7 +42,7 @@ public class SendEventExample {
         .tags(List.of(List.of()))
         .kind(Nkind.SET_METADATA)
         .sig("jlkjlkjlkjlkjlkjalsdfasdfasdf")
-      .content(MSG).build().updateId().getNevent01());
+      .content(MSG).build().updateId().getNeventMsg());
 
     final String json = JSON_MAPPER.writeValueAsString(request);
 

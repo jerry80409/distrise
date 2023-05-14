@@ -1,8 +1,10 @@
 package rise.distrise.nostr.core.event;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static java.time.ZoneOffset.UTC;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.time.LocalDateTime;
@@ -23,6 +25,7 @@ import lombok.Builder;
  * @param sig
  */
 @Builder
+@JsonInclude(NON_NULL)
 public record Nevent(
   @JsonProperty("id") NeventId id,
   @JsonProperty("pubkey") String pubkey,
@@ -54,11 +57,11 @@ public record Nevent(
   }
 
   @JsonIgnore
-  public Nevent01 getNevent01() throws JsonProcessingException {
+  public NeventMsg getNeventMsg() throws JsonProcessingException {
     if (Objects.isNull(id)) {
       throw new IllegalStateException("should updateId before");
     }
-    return Nevent01.builder().id(id.getSha256()).pubkey(pubkey).createdAt(createdAt.toEpochSecond(UTC))
+    return NeventMsg.builder().id(id.getSha256()).pubkey(pubkey).createdAt(createdAt.toEpochSecond(UTC))
       .tags(tags).kind(kind.getValue()).content(content).sig(sig).build();
   }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Builder;
 
 @Builder
-public record Nevent01(
+public record NeventMsg(
   @JsonProperty("id") String id,
   @JsonProperty("pubkey") String pubkey,
   @JsonProperty("created_at") Long createdAt,
