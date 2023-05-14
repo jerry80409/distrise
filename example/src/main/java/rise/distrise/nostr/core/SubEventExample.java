@@ -10,19 +10,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
-import org.java_websocket.framing.CloseFrame;
 import rise.distrise.nostr.core.message.event.EventMessage;
 import rise.distrise.nostr.core.message.event.Nevent;
+import rise.distrise.nostr.core.message.req.ReqMessage;
 
-// session 1 homework
 @Slf4j
-public class SendEventExample {
+public class SubEventExample {
 
   private static final String DUMMY_RELAY = "wss://relay.nekolicio.us/";
 
   private static final String LOCAL_HOST_RELAY = "ws://localhost:8080/distrise/jerry";
 
-  private static final String MSG = "Greeting form Jerry";
+  private static final String SUB_RELAY_ID = "12j312n31knkajsndaksndas";
 
   public static void main(String[] args) throws JsonProcessingException, InterruptedException {
     final String pubkey = System.getenv("pubkey");
@@ -31,28 +30,29 @@ public class SendEventExample {
       throw new IllegalArgumentException("Required sys env [pubkey] and [privkey]");
     }
 
-    // request
-    final EventMessage message = new EventMessage(Nevent.builder()
+    final EventMessage connect = new EventMessage(Nevent.builder()
       .pubkey(pubkey)
       .createdAt(LocalDateTime.now())
       .kind(Nkind.SET_METADATA)
       .tags(List.of(List.of()))
-      .content(MSG)
+      .content("watch testing")
       .sig(new BigInteger(pubkey, 16).toString())
       .build()
     );
+    final String connectJson = JSON.writeValueAsString(connect);
 
-    final String json = JSON.writeValueAsString(message);
+    // request
+    final ReqMessage subscription = new ReqMessage(SUB_RELAY_ID);
+    final String subJson = JSON.writeValueAsString(subscription);
 
-    // websocket send event
-    final WsClient wsClient = new WsClient(URI.create(LOCAL_HOST_RELAY));
+    final WsClient wsClient = new WsClient(URI.create(DUMMY_RELAY));
     log.info("Client connecting...");
     wsClient.connectBlocking(3, TimeUnit.SECONDS);
     log.info("Client connecting success");
 
     final Runnable runnable = () -> {
-      wsClient.send(json);
-      wsClient.close(CloseFrame.NORMAL);
+      wsClient.send(connectJson);
+      wsClient.send(subJson);
     };
     runnable.run();
   }

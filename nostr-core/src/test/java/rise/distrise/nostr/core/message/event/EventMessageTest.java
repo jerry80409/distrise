@@ -2,6 +2,7 @@ package rise.distrise.nostr.core.message.event;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static rise.distrise.nostr.core.Nkind.SET_METADATA;
+import static rise.distrise.nostr.core.utils.JsonUtils.JSON;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,8 +14,6 @@ import org.junit.jupiter.api.Test;
 import rise.distrise.nostr.core.Nkind;
 
 class EventMessageTest {
-
-  private static final ObjectMapper MAPPER = new ObjectMapper().registerModule(new JavaTimeModule());
 
   @Test
   void test_event_message_json_serialize() throws JsonProcessingException {
@@ -29,7 +28,7 @@ class EventMessageTest {
     final EventMessage eventMsg = new EventMessage(Nevent.builder()
       .pubkey(pubkey).createdAt(timestamp).kind(kind).tags(tags).content(content).sig(sig).build());
 
-    final String json = MAPPER.writeValueAsString(eventMsg);
+    final String json = JSON.writeValueAsString(eventMsg);
 
     Assertions.assertThat(json).isEqualTo("[\"EVENT\","
       + "{\"id\":\"7cfce126a9d82a6dd9756e9b0bad8d142698ab8e21b20347813512d55b42c32a\","

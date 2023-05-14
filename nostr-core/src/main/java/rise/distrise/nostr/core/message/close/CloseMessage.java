@@ -1,7 +1,9 @@
 package rise.distrise.nostr.core.message.close;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static rise.distrise.nostr.core.message.NmessageType.CLOSE;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
@@ -11,6 +13,7 @@ import lombok.Builder;
 import rise.distrise.nostr.core.message.Nmessage;
 
 @Builder
+@JsonInclude(NON_NULL)
 public class CloseMessage extends Nmessage<String> {
 
   private final String subId;
