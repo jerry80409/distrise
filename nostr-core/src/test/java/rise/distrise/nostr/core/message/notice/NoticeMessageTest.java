@@ -1,6 +1,5 @@
 package rise.distrise.nostr.core.message.notice;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static rise.distrise.nostr.core.utils.JsonUtils.JSON;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
