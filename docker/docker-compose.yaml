@@ -6,11 +6,11 @@ services:
     # cockroachdb 啟動後, 只跑單一 Node, --insecure(不走 cert 憑證連線)
     command: start-single-node --insecure
 
-    # 參照 .env 檔案
+    # 參照 .env 檔案 (但 --insecure 會導致, COCKROACH_USER 與 COCKROACH_PASSWORD 失效)
     environment:
       COCKROACH_DATABASE: ${DATABASE_NAME}
-      COCKROACH_USER: ${USER_NAME}
-      COCKROACH_PASSWORD: ${PASSWORD}
+      # COCKROACH_USER: ${USER_NAME}
+      # COCKROACH_PASSWORD: ${PASSWORD}
 
     # 8080 可在網頁上開啟 db console 查詢 database 資料,
     # 26257 為 db 連線的 port

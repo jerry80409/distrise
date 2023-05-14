@@ -14,6 +14,24 @@ docker login
 docker-compose up
 ```
 
+Because with insecure, I got the error `ERROR: setting or updating a password is not supported in insecure mode`. it 
+means the environment params of `USER_NAME`, `PASSWORD` didn't work.
+
+So the connection is 
+```
+jdbc:postgresql://localhost:26257/distrise?sslmode=disable
+```
+
+### Spring boot with JPA
+Follow the [nostr-spring](../nostr-spring/src/main/resources/application-cockroach.yaml).
+```yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:26257/distrise?sslmode=disable
+    username: root
+    password:
+```
+
 ### Cockroach web console
 * open browser: http://localhost:8081
 ![console](../doc/cockroach-console.png)
