@@ -1,53 +1,39 @@
 plugins {
   id 'java'
-  id 'io.spring.dependency-management' version '1.1.0'
 }
 
-allprojects {
+
+// all suproject setting
+subprojects {
+  apply plugin: 'java'
+
+  if (name != rootProject.name) {
+    rootProject.subprojects.add(project)
+  }
+
   // project metadata
   group 'rise.distrise.nostr'
   version '1.0-SNAPSHOT'
   description 'Mini Project implemented NOSTR protocol.'
 
   // compiler version
-  sourceCompatibility = '17'
-
-  // as the maven dependencyManagement
-  dependencyManagement {
-    dependencies {
-      dependency 'org.bouncycastle:bcprov-jdk15on:1.70'
-
-      // testing tools
-      dependency 'org.junit.jupiter:junit-jupiter-api:5.9.3'
-      dependency 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
-      dependency 'org.assertj:assertj-core:3.24.2'
-      dependency 'org.mockito:mockito-core:4.11.0'
-    }
-  }
-}
-
-// all suproject setting
-subprojects {
-  if (name != rootProject.name) {
-    rootProject.subprojects.add(project)
-  }
-  apply plugin: 'java'
-
-  // properties
-  version=rootProject.version
-  group=rootProject.gradle
-  sourceCompatibility = rootProject.sourceCompatibility
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
 
   repositories {
     mavenCentral()
   }
 
   dependencies {
+    // guava
     implementation 'com.google.guava:guava:31.1-jre'
+
+    // logback
     implementation 'ch.qos.logback:logback-classic:1.4.7'
+
+    // jackson
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.0'
-
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.26'
@@ -55,32 +41,10 @@ subprojects {
     testCompileOnly 'org.projectlombok:lombok:1.18.26'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
 
-  }
-
-  test {
-    useJUnitPlatform()
-  }
-
-  // configure the Maven-like project structure
-  sourceSets {
-    main {
-      java {
-        srcDirs = ['src/main/java']
-      }
-    }
-    test {
-      java {
-        srcDirs = ['src/test/java']
-      }
-    }
-  }
-
-  // configure the Maven-like build
-  jar {
-    manifest {
-      attributes 'Implementation-Title': project.name,
-        'Implementation-Version': project.version,
-        'Main-Class': 'com.example.Main'
-    }
+    // testing tools
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+    testImplementation 'org.mockito:mockito-core:4.11.0'
   }
 }

@@ -10,8 +10,8 @@ dependencies {
   implementation 'org.java-websocket:Java-WebSocket:1.5.3'
 }
 
-sourceCompatibility = 17
-targetCompatibility = 17
+//sourceCompatibility = 17
+//targetCompatibility = 17
 
 application {
   // 定義可執行文件的名稱和描述
@@ -19,6 +19,7 @@ application {
   applicationName = 'Sent Nostr Event Example'
 }
 
+// fixme - 不太懂 gradle 設定
 jar {
   // 定義 JAR 文件的名稱和描述
   archiveName = 'example-send-event.jar'

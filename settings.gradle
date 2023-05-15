@@ -1,3 +1,4 @@
 rootProject.name = 'distrise'
 include 'nostr-core'
 include 'example'
+include 'nostr-spring'
