@@ -44,7 +44,8 @@ public class Nevent {
   public Nevent(String pubkey, LocalDateTime createdAt, Nkind kind, List<List<String>> tags, String content,
     String sig) {
     try {
-      this.id = getId().toSha256String();
+      this.id = NeventId.builder().zero(0).pubkey(pubkey).createdAt(createdAt).kind(kind).tags(tags).content(content)
+        .build().toSha256String();
     } catch (JsonProcessingException e) {
       throw new IllegalArgumentException(String
         .format("Error occurred when the id was sha256 serialized, the id: {}", id));
