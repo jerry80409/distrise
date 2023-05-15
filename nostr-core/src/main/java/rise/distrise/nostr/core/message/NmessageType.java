@@ -11,4 +11,7 @@ public enum NmessageType {
 
   // when error occurred
   NOTICE,
+
+  UNKNOWN;
+
 }

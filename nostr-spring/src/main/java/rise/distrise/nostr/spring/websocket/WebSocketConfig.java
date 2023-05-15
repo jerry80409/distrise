@@ -23,12 +23,14 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration
 @EnableWebSocket
 @RequiredArgsConstructor
-@Import(RelayHandler.class)
 @ConditionalOnProperty("nostr.enabled")
+@Import({RelayHandler.class, RelaySignInterceptor.class})
 @EnableConfigurationProperties(NostrProperties.class)
 public class WebSocketConfig implements WebSocketConfigurer {
 
   private final RelayHandler relayHandler;
+
+  private final RelaySignInterceptor signInterceptor;
 
   private final NostrProperties properties;
 
@@ -44,6 +46,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     log.info("WebSocket handler registry register: {}, allowed origins: {}",
       "ws://localhost:" + env.getProperty("server.port") + properties.getPath(), "*");
     registry.addHandler(relayHandler, properties.getPath())
+      .addInterceptors(signInterceptor)  // verify sign interceptor
       .setAllowedOrigins("*");
   }
 }

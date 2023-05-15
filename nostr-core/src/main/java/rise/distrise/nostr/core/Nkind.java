@@ -1,10 +1,13 @@
 package rise.distrise.nostr.core;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public enum Nkind {
 
@@ -44,4 +47,8 @@ public enum Nkind {
   private int value;
 
   private String desc;
+
+  public static Nkind valueOf(int value) {
+    return Stream.of(values()).filter(k -> k.getValue() == value).findFirst().orElse(UNDEFINED);
+  }
 }

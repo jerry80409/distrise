@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import rise.distrise.nostr.core.message.event.EventMessage;
 import rise.distrise.nostr.core.message.event.Nevent;
 import rise.distrise.nostr.core.message.req.ReqMessage;
+import rise.distrise.nostr.core.utils.Signer;
 
 @Slf4j
 public class SubEventExample {
@@ -30,13 +31,14 @@ public class SubEventExample {
       throw new IllegalArgumentException("Required sys env [pubkey] and [privkey]");
     }
 
+    final String connectMsg = "watch testing";
     final EventMessage connect = new EventMessage(Nevent.builder()
       .pubkey(pubkey)
       .createdAt(LocalDateTime.now())
       .kind(Nkind.SET_METADATA)
       .tags(List.of(List.of()))
-      .content("watch testing")
-      .sig(new BigInteger(pubkey, 16).toString())
+      .content(connectMsg)
+      .sig(Signer.sign(connectMsg, pubkey))
       .build()
     );
     final String connectJson = JSON.writeValueAsString(connect);
@@ -45,7 +47,7 @@ public class SubEventExample {
     final ReqMessage subscription = new ReqMessage(SUB_RELAY_ID);
     final String subJson = JSON.writeValueAsString(subscription);
 
-    final WsClient wsClient = new WsClient(URI.create(DUMMY_RELAY));
+    final WsClient wsClient = new WsClient(URI.create(LOCAL_HOST_RELAY));
     log.info("Client connecting...");
     wsClient.connectBlocking(3, TimeUnit.SECONDS);
     log.info("Client connecting success");

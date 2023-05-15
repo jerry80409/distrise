@@ -6,9 +6,15 @@ spring:
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-test-query: SELECT 1
+      pool-name: pol
+      connection-timeout: 300
       maximum-pool-size: 50
       minimum-idle: 20
+      idle-timeout: 30000
+      max-lifetime: 2000000
+
   jpa:
+    defer-datasource-initialization: true
     open-in-view: false
     properties:
       hibernate:

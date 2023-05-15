@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.framing.CloseFrame;
 import rise.distrise.nostr.core.message.event.EventMessage;
 import rise.distrise.nostr.core.message.event.Nevent;
+import rise.distrise.nostr.core.utils.Signer;
 
 // session 1 homework
 @Slf4j
@@ -38,7 +39,7 @@ public class SendEventExample {
       .kind(Nkind.SET_METADATA)
       .tags(List.of(List.of()))
       .content(MSG)
-      .sig(new BigInteger(pubkey, 16).toString())
+      .sig(Signer.sign(MSG, pubkey))
       .build()
     );
 

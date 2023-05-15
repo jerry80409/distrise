@@ -2,22 +2,32 @@ package rise.distrise.nostr.core.message.event;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.Builder;
+import lombok.*;
 import rise.distrise.nostr.core.Nkind;
+import rise.distrise.nostr.core.utils.LocalDateTimeDeserialize;
 import rise.distrise.nostr.core.utils.LocalDateTimeSerializer;
+import rise.distrise.nostr.core.utils.NkindDeserialize;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(NON_NULL)
 public class Nevent {
 
   /**
    * sha256 id
    */
+  @EqualsAndHashCode.Include
   @JsonProperty("id")
   private String id;
 
@@ -25,9 +35,11 @@ public class Nevent {
   private String pubkey;
 
   @JsonSerialize(using = LocalDateTimeSerializer.class)
+  @JsonDeserialize(using = LocalDateTimeDeserialize.class)
   @JsonProperty("created_at")
   private LocalDateTime createdAt;
 
+  @JsonDeserialize(using = NkindDeserialize.class)
   @JsonProperty("kind")
   private Nkind kind;
 
@@ -63,7 +75,8 @@ public class Nevent {
    * get id
    * @return NeventId
    */
-  public NeventId getId() {
+  @JsonIgnore
+  public NeventId getNeventId() {
     return NeventId.builder().zero(0).pubkey(pubkey).createdAt(createdAt).kind(kind).tags(tags).content(content)
       .build();
   }

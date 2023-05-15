@@ -10,12 +10,14 @@ import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import java.io.IOException;
 import java.util.List;
 import lombok.Builder;
+import lombok.Getter;
 import rise.distrise.nostr.core.message.Nmessage;
 
 @Builder
 @JsonInclude(NON_NULL)
 public class EventMessage extends Nmessage<Nevent> {
 
+  @Getter
   private Nevent content;
 
   public EventMessage(Nevent content) {
