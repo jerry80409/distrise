@@ -3,7 +3,7 @@ plugins {
 }
 
 subprojects {
-  group 'com.github.jerry80409'
+  group 'com.distrise.nostr'
   version '1.0-SNAPSHOT'
 
   // compiler version
