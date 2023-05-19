@@ -1,1 +1,3 @@
 rootProject.name = 'distrise'
+include 'nostr-core'
+

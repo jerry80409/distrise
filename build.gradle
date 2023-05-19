@@ -3,6 +3,8 @@ plugins {
 }
 
 subprojects {
+  apply plugin: 'java'
+
   group 'com.distrise.nostr'
   version '1.0-SNAPSHOT'
 
