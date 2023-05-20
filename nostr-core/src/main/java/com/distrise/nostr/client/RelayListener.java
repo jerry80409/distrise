@@ -1,12 +1,5 @@
 package com.distrise.nostr.client;
 
-import static com.distrise.nostr.client.ConnectionState.CONNECTED;
-import static com.distrise.nostr.client.ConnectionState.DISCONNECTED;
-import static com.distrise.nostr.client.ConnectionState.FAILING;
-
-import com.distrise.nostr.message.RelayMessage;
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;
 import okhttp3.WebSocket;

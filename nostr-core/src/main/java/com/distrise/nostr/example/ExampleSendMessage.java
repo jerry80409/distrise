@@ -4,7 +4,7 @@ import com.distrise.nostr.client.RelayClient;
 import com.distrise.nostr.event.Event;
 import java.util.List;
 
-public class ExampleSendMsg {
+public class ExampleSendMessage {
 
   private static final String URL = "wss://relay.nekolicio.us";
 

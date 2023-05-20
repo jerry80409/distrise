@@ -39,12 +39,10 @@ public class RelayClient {
     send(List.of("EVENT", event));
   }
 
-  // todo
-//  public void subscribe()
-//  override fun subscribe(filters: Set<Filter>, subscription: Subscription): Subscription = subscription.also {
-//    send(listOf<Any>("REQ", it.id).plus(filters.toList()))
-//    subscriptions[subscription] = filters
-//  }
+  // todo - filters
+  public void subscribe(Subscription subscription) {
+    send(List.of("REQ", subscription.id()));
+  }
 
 //  override fun unsubscribe(subscription: Subscription) {
 //    subscriptions.remove(subscription)
