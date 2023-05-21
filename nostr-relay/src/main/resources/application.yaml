@@ -1,0 +1,13 @@
+debug: false
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  level:
+    root: info
+    rise.distrise.nostr: debug

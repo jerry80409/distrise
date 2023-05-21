@@ -9,8 +9,8 @@ services:
     image: cockroachdb/cockroach:latest
     command: start-single-node --insecure
     environment:
-      COCKROACH_DATABASE: ${DATABASE_NAME:distrise}
-      COCKROACH_USER: ${USER_NAME:root}
+      COCKROACH_DATABASE: ${DATABASE_NAME:-distrise}
+      COCKROACH_USER: ${USER_NAME:-root}
     ports:
       - "26257:26257"
       - "8081:8080"
@@ -18,5 +18,17 @@ services:
       - roach-single:/cockroach/cockroach-data
       - ./init-scripts:/docker-entrypoint-initdb.d
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"  # RabbitMQ 通訊埠
+      - "15672:15672"  # RabbitMQ 管理界面
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-admin}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-admin}
+
 volumes:
   roach-single:
+  rabbitmq_data:
