@@ -1,8 +1,9 @@
 package com.distrise.nostr.client;
 
 import com.distrise.nostr.event.Event;
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
+import com.distrise.nostr.event.json.HexByteStringAdaptor;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,24 +13,25 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
+import okio.ByteString;
 
 @Slf4j
 public class RelayClient {
 
   private final WebSocket socket;
 
-  private final JsonAdapter<List> messageAdapter = new Moshi.Builder().build()
-    .adapter(List.class);
+  // todo - 解耦它?
+  private final Gson gson = new GsonBuilder()
+    .registerTypeAdapter(ByteString.class, new HexByteStringAdaptor())
+    .create();
 
+  // todo - 由外面注入
   private final ExecutorService threads = Executors.newFixedThreadPool(10);
-
 
   @Builder
   public RelayClient(String url) {
-    final OkHttpClient httpClient = new OkHttpClient().newBuilder()
-      .pingInterval(20, TimeUnit.SECONDS).build();
-    final RelayListener relayListener = new RelayListener(url);
-    socket = httpClient.newWebSocket(new Request.Builder().url(url).build(), relayListener);
+    final OkHttpClient httpClient = new OkHttpClient().newBuilder().pingInterval(20, TimeUnit.SECONDS).build();
+    socket = httpClient.newWebSocket(new Request.Builder().url(url).build(), new RelayListener(url));
   }
 
   /**
@@ -44,14 +46,13 @@ public class RelayClient {
     send(List.of("REQ", subscription.id()));
   }
 
-//  override fun unsubscribe(subscription: Subscription) {
-//    subscriptions.remove(subscription)
-//    send(listOf("CLOSE", subscription.id))
-//  }
+  public void unsubscribe(Subscription subscription) {
+    send(List.of("CLOSE", subscription.id()));
+  }
 
   private void send(List<?> message) {
-    final String json = messageAdapter.toJson(message);
+    final String json = gson.toJson(message);
     log.info("Send the message: {}", json);
-    threads.submit(() -> socket.send(messageAdapter.toJson(message)));
+    threads.submit(() -> socket.send(json));
   }
 }
