@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+
+  # cockroachdb 啟動後, 只跑單一 Node, --insecure(不走 cert 憑證連線)
+  # 8081 可在網頁上開啟 db console 查詢 database 資料
+  # 26257 為 db 連線的 port
+  roach-single:
+    image: cockroachdb/cockroach:latest
+    command: start-single-node --insecure
+    environment:
+      COCKROACH_DATABASE: ${DATABASE_NAME:distrise}
+      COCKROACH_USER: ${USER_NAME:root}
+    ports:
+      - "26257:26257"
+      - "8081:8080"
+    volumes:
+      - roach-single:/cockroach/cockroach-data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+
+volumes:
+  roach-single:
