@@ -13,31 +13,20 @@ public class RelayListener extends WebSocketListener {
 
   private final String label;
 
-//  private final ConnectionStateListener listener;
-
-//  private final JsonAdapter<RelayMessage> relayMessageAdapter = new Moshi.Builder().build()
-//    .adapter(RelayMessage.class);
-
-
   public RelayListener(String label) {
     this.label = label;
   }
 
-//  public RelayListener(String label, ConnectionStateListener listener) {
-//    this.label = label;
-//    this.listener = listener;
-//  }
-
   @Override
   public void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
     log.info("WebSocket is closed. [Relay: {}]", this.label);
-//    listener.update(DISCONNECTED);
+
   }
 
   @Override
   public void onClosing(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
     log.warn("WebSocket is closgin. [Relay: {}]", this.label);
-//    listener.update(DISCONNECTED);
+
   }
 
   @Override
@@ -60,6 +49,5 @@ public class RelayListener extends WebSocketListener {
   @Override
   public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
     log.info("WebSocket is open. [Relay: {}] [Response: {}]", this.label, response.message());
-//    this.listener.update(CONNECTED);
   }
 }

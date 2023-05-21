@@ -1,6 +1,6 @@
 package com.distrise.nostr.crypto.bech32;
 
-enum Bech32Prefix {
+public enum Bech32Prefix {
   NPUB("npub", "public keys"),
   NSEC("nsec", "private keys"),
   NOTE("note", "note ids"),
