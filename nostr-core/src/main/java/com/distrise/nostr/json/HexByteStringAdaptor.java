@@ -1,4 +1,4 @@
-package com.distrise.nostr.event.json;
+package com.distrise.nostr.json;
 
 import com.google.gson.*;
 import java.lang.reflect.Type;

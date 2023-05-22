@@ -1,6 +1,7 @@
 package com.distrise.nostr.event;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 import java.util.List;
 import lombok.Builder;
 import okio.ByteString;
@@ -13,7 +14,7 @@ public record Event(
   Integer kind,
   List<List<String>> tags,
   String content,
-  ByteString sig) {
+  ByteString sig) implements Serializable {
 
 
 }

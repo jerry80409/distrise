@@ -1,10 +1,11 @@
 package com.distrise.nostr.client;
 
 import com.distrise.nostr.event.Event;
-import com.distrise.nostr.event.json.HexByteStringAdaptor;
+import com.distrise.nostr.json.HexByteStringAdaptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
 import okio.ByteString;
 
 @Slf4j
@@ -20,7 +22,9 @@ public class RelayClient {
 
   private final WebSocket socket;
 
-  // todo - 解耦它?
+  private final WebSocketListener listener;
+
+  // todo - 解耦
   private final Gson gson = new GsonBuilder()
     .registerTypeAdapter(ByteString.class, new HexByteStringAdaptor())
     .create();
@@ -29,9 +33,10 @@ public class RelayClient {
   private final ExecutorService threads = Executors.newFixedThreadPool(10);
 
   @Builder
-  public RelayClient(String url) {
+  public RelayClient(String url, WebSocketListener listener) {
     final OkHttpClient httpClient = new OkHttpClient().newBuilder().pingInterval(20, TimeUnit.SECONDS).build();
-    socket = httpClient.newWebSocket(new Request.Builder().url(url).build(), new RelayListener(url));
+    this.listener = Objects.nonNull(listener) ? listener : new RelayListener(url);
+    this.socket = httpClient.newWebSocket(new Request.Builder().url(url).build(), this.listener);
   }
 
   /**

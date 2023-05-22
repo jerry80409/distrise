@@ -48,6 +48,6 @@ public class TextContent implements EventContent {
 
   @Override
   public String contentToJson() {
-    return "null";
+    return GSON.toJson(content);
   }
 }

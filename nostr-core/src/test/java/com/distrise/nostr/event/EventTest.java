@@ -1,6 +1,6 @@
 package com.distrise.nostr.event;
 
-import com.distrise.nostr.event.json.HexByteStringAdaptor;
+import com.distrise.nostr.json.HexByteStringAdaptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;

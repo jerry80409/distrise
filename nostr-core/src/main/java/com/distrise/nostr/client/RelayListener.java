@@ -11,6 +11,9 @@ import org.jetbrains.annotations.Nullable;
 @Slf4j
 public class RelayListener extends WebSocketListener {
 
+  /**
+   * mark the Relay subscribe URL as label
+   */
   private final String label;
 
   public RelayListener(String label) {
@@ -25,14 +28,14 @@ public class RelayListener extends WebSocketListener {
 
   @Override
   public void onClosing(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
-    log.warn("WebSocket is closgin. [Relay: {}]", this.label);
+    log.warn("WebSocket is closing. [Relay: {}]", this.label);
 
   }
 
   @Override
   public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
     log.error("WebSocket failure. [Relay: {}]", this.label);
-//    listener.update(FAILING);
+
   }
 
   @Override
@@ -50,4 +53,5 @@ public class RelayListener extends WebSocketListener {
   public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
     log.info("WebSocket is open. [Relay: {}] [Response: {}]", this.label, response.message());
   }
+
 }
