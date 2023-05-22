@@ -11,7 +11,7 @@ import java.util.List;
 import okio.ByteString;
 
 // todo
-public class RelayMessageAdaptor {
+class RelayMessageAdaptor {
 
 //  public RelayMessage relayMessageFromJson(
 //    JsonReader reader,
