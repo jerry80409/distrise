@@ -1,7 +1,9 @@
 dependencies {
   implementation 'com.squareup.okhttp3:okhttp:4.11.0'
 
-  implementation 'com.google.code.gson:gson:2.10.1'
+  // secp256k1
+  implementation 'fr.acinq.secp256k1:secp256k1-kmp-jvm:0.10.0'
+  runtimeOnly 'fr.acinq.secp256k1:secp256k1-kmp-jni-jvm:0.10.0'
 
   // https://mvnrepository.com/artifact/com.squareup.moshi/moshi
 //  implementation 'com.squareup.moshi:moshi:1.15.0'
@@ -9,8 +11,4 @@ dependencies {
 //  runtimeOnly 'com.squareup.moshi:moshi-adapters:1.15.0'
 //  runtimeOnly 'com.squareup.moshi:moshi-kotlin-codegen:1.15.0'
 
-
-  // secp256k1
-  implementation 'fr.acinq.secp256k1:secp256k1-kmp-jvm:0.10.0'
-  runtimeOnly 'fr.acinq.secp256k1:secp256k1-kmp-jni-jvm:0.10.0'
 }

@@ -19,6 +19,8 @@ subprojects {
   dependencies {
     // guava
     implementation 'com.google.guava:guava:31.1-jre'
+    // gson
+    implementation 'com.google.code.gson:gson:2.10.1'
     // logback
     implementation 'ch.qos.logback:logback-classic:1.4.7'
     // lobmok
