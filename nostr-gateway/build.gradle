@@ -13,8 +13,9 @@ configurations {
 }
 
 dependencies {
-  implementation project(':relay-core')
+  implementation project(':nostr-core')
   implementation 'org.springframework.boot:spring-boot-starter-amqp'
+  implementation 'org.springframework.boot:spring-boot-starter-websocket'
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation 'org.springframework.boot:spring-boot-starter-web'
   compileOnly 'org.projectlombok:lombok'
@@ -25,6 +26,8 @@ dependencies {
   annotationProcessor 'org.projectlombok:lombok'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
   testImplementation 'org.springframework.amqp:spring-rabbit-test'
+
+  implementation 'com.squareup.okhttp3:okhttp:4.11.0'
 }
 
 tasks.named('test') {

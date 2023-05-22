@@ -5,9 +5,11 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@EnableRabbit
 @Configuration
 public class RabbitMqConfig {
 
@@ -21,7 +23,7 @@ public class RabbitMqConfig {
   // https://blog.csdn.net/qq_35387940/article/details/100514134
   @Bean
   Queue relayQueue() {
-    return new Queue(RELAY_QUEUE, false, true, false);
+    return new Queue(RELAY_QUEUE, true, true, false);
   }
 
   /**
@@ -30,7 +32,7 @@ public class RabbitMqConfig {
    */
   @Bean
   DirectExchange relayExchange() {
-    return new DirectExchange(RELAY_EXCHANGE, false, false);
+    return new DirectExchange(RELAY_EXCHANGE, true, false);
   }
 
   /**
