@@ -60,12 +60,12 @@ class RabbitConsumer {
       }
 
       // persisted
-      eventRepository.save(mapper(event));
+      eventRepository.save(mapper(eventMessage.subscriptionId(), event));
     }
   }
 
-  private EventEntity mapper(Event event) {
+  private EventEntity mapper(String subscriptionId, Event event) {
     return EventEntity.builder().id(event.id().hex()).createdAt(event.createdAt()).pubkey(event.pubkey().hex())
-      .content(event.content()).build();
+      .subscription(subscriptionId).content(event.content()).build();
   }
 }

@@ -1,16 +1,14 @@
 package com.distrise.nostr.nostrgateway.jpa.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "EVENT")
+@Table(name = "EVENT", indexes = {
+  @Index(name = "EVENT_SUB_PUBKEY_IDX", columnList = "SUBSCRIPTION,PUBKEY")})
 public class EventEntity {
 
   @Id
@@ -18,6 +16,9 @@ public class EventEntity {
   @EqualsAndHashCode.Include
   @Column(name = "ID")
   private String id;
+
+  @Column(name = "SUBSCRIPTION")
+  private String subscription;
 
   @ToString.Include
   @Column(name = "CREATED_AT")
