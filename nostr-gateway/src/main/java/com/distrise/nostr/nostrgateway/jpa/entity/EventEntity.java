@@ -3,6 +3,8 @@ package com.distrise.nostr.nostrgateway.jpa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Getter
+@Setter
 @Entity
 @Builder
 @NoArgsConstructor
