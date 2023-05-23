@@ -33,6 +33,7 @@ curl 'http://localhost:8080/event?size=10&page=0'
 Please provide a short writeup of why you chose a particular database for Phase 3, answering the following questions:
 * Why did you choose this database? Is it the same or different database as the one you used in Phase 2? Why is it 
 the same or a different one?
+
 我還是會選擇 Cockroach database, 跟 Phase2 的考量一樣, Nostr Gateway 在責任上還是算是 Relay 的一種, 但是需要特別去提供依照某些條件讀取 Event 數據, 可能來自於 Web 畫面上的操作 (這個情境就有別於 Relay 回覆訊息), 
 因此在資料的查詢與索引上會需要特別注意.
 
@@ -46,8 +47,9 @@ Range 看起來像是 Cockroach 的 Sharding 功能, 會將 table 與 index 依�
 而這一篇 2018 年的文章 (https://blog.wolfogre.com/posts/test-of-cockroachdb/) 總結了許多 Cockroach 的容災, 可用的概念.
 
 * If the number of events to be stored will be huge, what would you do to scale the database?
+
 Gateway 本身職責在寫與讀, 不太會有更新資料, 資料鎖的問題, 在讀取資料上, 比較不需要即時性, 但可能依據 client 想要的資訊做出查詢. 故在查詢資料上應盡可能地避免全表掃描.
-* 若針對 Nostr Events 的資訊去處理, 應該會是一張大表,
-* 基於 Cockroach 很好的支援了分布式的 database, 可以簡單透過水平擴展的方式增加 Node 來提乘載量.
-* 在 Cockroach 的建議下採用 UUID 的 ID 設計會是需要的, 避免 Hot spot 的發生.
-* Index 的設計, 我還沒想好, 但我想 user 可能會想針對某些 tags, filters 或是 subscribeId 做出資料的查詢, 這些可能是 index 設計的重點.
+  * 若針對 Nostr Events 的資訊去處理, 應該會是一張大表,
+  * 基於 Cockroach 很好的支援了分布式的 database, 可以簡單透過水平擴展的方式增加 Node 來提乘載量.
+  * 在 Cockroach 的建議下採用 UUID 的 ID 設計會是需要的, 避免 Hot spot 的發生.
+  * Index 的設計, 我還沒想好, 但我想 user 可能會想針對某些 tags, filters 或是 subscribeId 做出資料的查詢, 這些可能是 index 設計的重點.
