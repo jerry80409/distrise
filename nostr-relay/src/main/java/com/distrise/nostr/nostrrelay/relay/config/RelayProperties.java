@@ -1,4 +1,4 @@
-package com.distrise.nostr.nostrrelay.gateway.config;
+package com.distrise.nostr.nostrrelay.relay.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

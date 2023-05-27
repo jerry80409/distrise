@@ -1,7 +1,5 @@
-package com.distrise.nostr.nostrrelay.gateway.config;
+package com.distrise.nostr.nostrrelay.relay.config;
 
-import com.distrise.nostr.nostrrelay.gateway.handler.RelayHandler;
-import com.distrise.nostr.nostrrelay.gateway.handler.RelayInterceptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

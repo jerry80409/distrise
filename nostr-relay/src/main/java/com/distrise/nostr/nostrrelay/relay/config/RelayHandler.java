@@ -1,4 +1,4 @@
-package com.distrise.nostr.nostrrelay.gateway.handler;
+package com.distrise.nostr.nostrrelay.relay.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
