@@ -2,11 +2,11 @@ package com.distrise.nostr.nostrgateway;
 
 import com.distrise.nostr.json.HexByteStringAdaptor;
 import com.distrise.nostr.json.RelayMessageAdaptor;
-import com.distrise.nostr.message.relay.EndOfStoredEvent;
-import com.distrise.nostr.message.relay.EventMessage;
+import com.distrise.nostr.relay.message.EndOfStoredEvent;
+import com.distrise.nostr.relay.message.EventMessage;
 import com.distrise.nostr.json.EndOfStoreEventAdaptor;
 import com.distrise.nostr.json.EventMessageAdaptor;
-import com.distrise.nostr.message.relay.RelayMessage;
+import com.distrise.nostr.relay.message.RelayMessage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import okio.ByteString;

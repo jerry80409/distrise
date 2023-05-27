@@ -1,6 +1,6 @@
 package com.distrise.nostr.json;
 
-import com.distrise.nostr.message.relay.EndOfStoredEvent;
+import com.distrise.nostr.relay.message.EndOfStoredEvent;
 import com.google.gson.*;
 import java.lang.reflect.Type;
 

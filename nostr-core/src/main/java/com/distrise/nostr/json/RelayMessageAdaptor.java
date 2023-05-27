@@ -1,8 +1,6 @@
 package com.distrise.nostr.json;
 
-import com.distrise.nostr.message.relay.EndOfStoredEvent;
-import com.distrise.nostr.message.relay.EventMessage;
-import com.distrise.nostr.message.relay.RelayMessage;
+import com.distrise.nostr.relay.message.RelayMessage;
 import com.google.gson.*;
 import java.lang.reflect.Type;
 
@@ -16,7 +14,7 @@ public class RelayMessageAdaptor implements JsonSerializer<RelayMessage>, JsonDe
     return switch (type) {
       case "EOSE" -> new EndOfStoreEventAdaptor().deserialize(json, typeOfT, context);
       case "EVENT" -> new EventMessageAdaptor().deserialize(json, typeOfT, context);
-      default -> throw new UnsupportedOperationException("Unsupport type: " + type);
+      default -> throw new UnsupportedOperationException("Unsupported type: " + type);
     };
   }
 

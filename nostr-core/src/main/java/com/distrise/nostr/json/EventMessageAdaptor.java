@@ -1,7 +1,7 @@
 package com.distrise.nostr.json;
 
 import com.distrise.nostr.event.Event;
-import com.distrise.nostr.message.relay.EventMessage;
+import com.distrise.nostr.relay.message.EventMessage;
 import com.google.gson.*;
 import java.lang.reflect.Type;
 
