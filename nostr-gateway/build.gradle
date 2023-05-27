@@ -28,6 +28,9 @@ dependencies {
   testImplementation 'org.springframework.amqp:spring-rabbit-test'
 
   implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+
+  // trace sql
+  implementation 'net.ttddyy:datasource-proxy:1.4.1'
 }
 
 tasks.named('test') {
