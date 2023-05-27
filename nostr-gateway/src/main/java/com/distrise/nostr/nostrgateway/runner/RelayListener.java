@@ -54,6 +54,6 @@ class RelayListener extends WebSocketListener {
 
   @Override
   public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
-    log.info("Websocket [Relay: {}] on open, response", webSocket.request().url(), response);
+    log.info("Websocket [Relay: {}] on open, response: {}", webSocket.request().url(), response);
   }
 }
