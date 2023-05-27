@@ -19,8 +19,10 @@ public class RelayHandler implements WebSocketHandler {
     if (!message.getClass().equals(TextMessage.class)) {
       throw new UnsupportedOperationException("Unsupported the websocket message");
     }
-    final TextMessage textMessage = (TextMessage) message;
 
+    // just echo
+    final TextMessage textMessage = (TextMessage) message;
+    session.sendMessage(textMessage);
   }
 
   @Override
