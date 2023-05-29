@@ -1,6 +1,7 @@
 package com.distrise.nostr.client;
 
 import com.distrise.nostr.event.Event;
+import com.distrise.nostr.event.Subscription;
 import com.distrise.nostr.json.HexByteStringAdaptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

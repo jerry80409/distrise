@@ -1,7 +1,7 @@
 package com.distrise.nostr.example;
 
 import com.distrise.nostr.client.RelayClient;
-import com.distrise.nostr.client.Subscription;
+import com.distrise.nostr.event.Subscription;
 
 public class ExampleSubscription {
 

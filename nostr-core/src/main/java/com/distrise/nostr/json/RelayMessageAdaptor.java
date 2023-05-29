@@ -14,7 +14,7 @@ public class RelayMessageAdaptor implements JsonSerializer<RelayMessage>, JsonDe
     return switch (type) {
       case "EOSE" -> new EndOfStoreEventAdaptor().deserialize(json, typeOfT, context);
       case "EVENT" -> new EventMessageAdaptor().deserialize(json, typeOfT, context);
-      case "REQ" -> new RelayMessageAdaptor().deserialize(json, typeOfT, context);
+      case "REQ" -> new RequestEventAdaptor().deserialize(json, typeOfT, context);
       default -> throw new UnsupportedOperationException("Unsupported type: " + type);
     };
   }
