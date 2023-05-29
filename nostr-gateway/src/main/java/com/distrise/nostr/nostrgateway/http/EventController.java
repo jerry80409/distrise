@@ -21,6 +21,13 @@ class EventController {
 
   private final EventService service;
 
+  /**
+   * Query the Events from database.
+   *
+   * @param conditions selected by conditions
+   * @param pageable pageable default size is 10.
+   * @return Events data
+   */
   @GetMapping
   public Page<EventDto> query(EventQuery conditions,
     @PageableDefault(size = 10, page = 0, sort = "createdAt", direction = DESC) Pageable pageable) {
