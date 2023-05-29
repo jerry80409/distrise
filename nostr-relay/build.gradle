@@ -30,6 +30,9 @@ dependencies {
 
   // trace sql
   implementation 'net.ttddyy:datasource-proxy:1.4.1'
+
+  // lorem
+  implementation 'org.thshsh:lorem-ipsum-generator:2.0.0'
 }
 
 tasks.named('test') {

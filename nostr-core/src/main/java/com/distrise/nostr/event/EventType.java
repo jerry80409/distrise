@@ -4,4 +4,6 @@ public enum EventType {
   EVENT,
   REQ,
   EOSE,
+  CLOSE,
+  NOTICE,
 }

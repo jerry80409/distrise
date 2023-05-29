@@ -8,4 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class RelayProperties {
 
   private String path;
+
+  private String subscriptionId;
 }

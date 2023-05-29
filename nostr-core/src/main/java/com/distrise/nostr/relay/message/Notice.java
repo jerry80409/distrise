@@ -7,7 +7,6 @@ public record Notice(String message) implements RelayMessage, Serializable {
 
   @Override
   public EventType getType() {
-    // todo
-    return null;
+    return EventType.NOTICE;
   }
 }

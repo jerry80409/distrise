@@ -1,12 +1,28 @@
 package com.distrise.nostr.nostrrelay.relay.config;
 
+import com.distrise.nostr.nostrrelay.relay.handler.EventMessageHandler;
+import com.distrise.nostr.nostrrelay.relay.handler.ReqMessageHandler;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class RelayHandler implements WebSocketHandler {
+
+  private final Gson gson;
+
+  private final EventMessageHandler eventMessageHandler;
+
+  private final ReqMessageHandler reqMessageHandler;
 
   @Override
   public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -20,9 +36,18 @@ public class RelayHandler implements WebSocketHandler {
       throw new UnsupportedOperationException("Unsupported the websocket message");
     }
 
-    // just echo
     final TextMessage textMessage = (TextMessage) message;
-    session.sendMessage(textMessage);
+
+    // https://github.com/google/gson/blob/master/extras/src/main/java/com/google/gson/extras/examples/rawcollections/RawCollectionsExample.java
+    final JsonArray jsonArray = JsonParser.parseString(textMessage.getPayload()).getAsJsonArray();
+    final String type = jsonArray.get(0).getAsString();
+
+    switch (type) {
+      case "EVENT" -> eventMessageHandler.handler(session, jsonArray.get(1));
+      case "REQ" -> reqMessageHandler.handler(session, jsonArray.get(1).getAsString());
+      case "CLOSE" -> session.close(CloseStatus.NORMAL);
+      default -> throw new UnsupportedOperationException("Unsupported type: " + type);
+    }
   }
 
   @Override

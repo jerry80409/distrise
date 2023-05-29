@@ -4,6 +4,5 @@ import com.distrise.nostr.event.EventType;
 
 public interface RelayMessage {
 
-
   EventType getType();
 }
