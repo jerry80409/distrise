@@ -4,3 +4,8 @@ spring:
     port: 5672
     username: admin
     password: admin
+    template:
+      retry:
+        enabled: true
+        initial-interval: 2s
+        max-attempts: 2
