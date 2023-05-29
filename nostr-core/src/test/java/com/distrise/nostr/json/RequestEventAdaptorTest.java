@@ -1,7 +1,5 @@
 package com.distrise.nostr.json;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.distrise.nostr.event.Event;
 import com.distrise.nostr.relay.message.EndOfStoredEvent;
 import com.distrise.nostr.relay.message.EventMessage;

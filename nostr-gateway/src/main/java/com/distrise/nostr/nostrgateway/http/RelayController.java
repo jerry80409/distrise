@@ -1,10 +1,9 @@
 package com.distrise.nostr.nostrgateway.http;
 
 import com.distrise.nostr.client.RelayClient;
-import com.distrise.nostr.client.Subscription;
+import com.distrise.nostr.event.Subscription;
 import com.distrise.nostr.nostrgateway.http.dto.RelayDto;
 import com.distrise.nostr.nostrgateway.runner.RelayListener;
-import com.distrise.nostr.nostrgateway.runner.RelayProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

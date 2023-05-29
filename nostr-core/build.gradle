@@ -2,9 +2,6 @@ dependencies {
   // okhttp3
   implementation 'com.squareup.okhttp3:okhttp:4.11.0'
 
-  // okio
-  implementation 'com.squareup.okio:okio:3.3.0'
-
   // secp256k1
   implementation 'fr.acinq.secp256k1:secp256k1-kmp-jvm:0.10.0'
   runtimeOnly 'fr.acinq.secp256k1:secp256k1-kmp-jni-jvm:0.10.0'
