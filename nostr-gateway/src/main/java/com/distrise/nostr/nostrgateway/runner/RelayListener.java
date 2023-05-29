@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-class RelayListener extends WebSocketListener {
+public class RelayListener extends WebSocketListener {
 
   private final RabbitTemplate rabbitClient;
 

@@ -14,7 +14,6 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 @RequiredArgsConstructor
 @Import({ RelayHandler.class, RelayInterceptor.class })
-@EnableConfigurationProperties(RelayProperties.class)
 public class WebSocketConfig implements WebSocketConfigurer {
 
   private final RelayProperties properties;

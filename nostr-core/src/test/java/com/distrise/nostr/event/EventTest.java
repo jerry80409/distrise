@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 class EventTest {
 
+  private static final String FAKE_KEY = "56ed68e45f289b323407af4fb07a124ae7d5b32c3724233d5aa9d2647d4b22a8";
+
   private final Gson gson = new GsonBuilder()
     .registerTypeAdapter(ByteString.class, new HexByteStringAdaptor())
     .create();
@@ -19,7 +21,7 @@ class EventTest {
     Event event = Event.builder()
       .id(ByteString.decodeHex("4fd9e844927aa5a5c01e857c32a8ee8598418aaab3025d437fce3a7d94e2ea3d"))
       .sig(ByteString.decodeHex("6dcaff62670486a39f5a739fe1112273aa03e0584056e6862390a966546613e40c11745759ef1d04c1750cb304c033209ee6ed77a272f3e0519f4abe505354e4"))
-      .pubkey(ByteString.decodeHex("56ed68e45f289b323407af4fb07a124ae7d5b32c3724233d5aa9d2647d4b22a8"))
+      .pubkey(ByteString.decodeHex(FAKE_KEY))
       .createdAt(16_846_406_39L)
       .kind(1).tags(List.of())
       .content("test")
@@ -45,7 +47,13 @@ class EventTest {
       + "\"sig\":\"6dcaff62670486a39f5a739fe1112273aa03e0584056e6862390a966546613e40c11745759ef1d04c1750cb304c033209ee6ed77a272f3e0519f4abe505354e4\"}";
 
     final Event event = gson.fromJson(json, Event.class);
-    System.out.println(event);
+    Assertions.assertThat(event)
+      .hasFieldOrPropertyWithValue("id", ByteString.decodeHex("4fd9e844927aa5a5c01e857c32a8ee8598418aaab3025d437fce3a7d94e2ea3d"))
+      .hasFieldOrPropertyWithValue("pubkey", ByteString.decodeHex("56ed68e45f289b323407af4fb07a124ae7d5b32c3724233d5aa9d2647d4b22a8"))
+      .hasFieldOrPropertyWithValue("createdAt", 1_684_640_639L)
+      .hasFieldOrPropertyWithValue("content", "test")
+      .hasFieldOrPropertyWithValue("sig", ByteString.decodeHex("6dcaff62670486a39f5a739fe1112273aa03e0584056e6862390a966546613e40c11745759ef1d04c1750cb304c033209ee6ed77a272f3e0519f4abe505354e4"))
+      .hasFieldOrPropertyWithValue("kind", 1)
+      .hasFieldOrPropertyWithValue("tags", List.of());
   }
-
 }

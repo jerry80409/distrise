@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class RelayController {
 
-  private final RelayProperties properties;
-
   private final RelayListener relayListener;
 
   @PostMapping
