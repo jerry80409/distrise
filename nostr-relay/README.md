@@ -1,13 +1,13 @@
 # Nostr-Relay
 
 ## Features
--[x] Accept events from nostr clients ((NIP-42 authentication is not supported))
--[x] Provide a websockets (ws://localhost:8080/relay)
--[x] Support the following types of messages:
-  -[x] ["EVENT", <event JSON as defined above>]
-  -[x] ["REQ", <subscription_id>, <filters JSON>...]
-  -[x] ["CLOSE", <subscription_id>]
--[x] Verify that the event’s id and signature (sig) are valid
+* [x] Accept events from nostr clients ((NIP-42 authentication is not supported))
+* [x] Provide a websockets (ws://localhost:8080/relay)
+* [x] Support the following types of messages:
+  - [x] ["EVENT", <event JSON as defined above>]
+  - [x] ["REQ", <subscription_id>, <filters JSON>...]
+  - [x] ["CLOSE", <subscription_id>]
+* [x] Verify that the event’s id and signature (sig) are valid
 
 ## Required
 * JDK 17
