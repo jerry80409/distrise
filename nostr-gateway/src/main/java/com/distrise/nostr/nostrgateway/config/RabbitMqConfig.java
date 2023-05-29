@@ -1,6 +1,5 @@
 package com.distrise.nostr.nostrgateway.config;
 
-
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
