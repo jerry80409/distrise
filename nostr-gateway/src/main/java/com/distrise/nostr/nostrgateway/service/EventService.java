@@ -1,4 +1,4 @@
-package com.distrise.nostr.nostrgateway.http;
+package com.distrise.nostr.nostrgateway.service;
 
 import com.distrise.nostr.nostrgateway.http.dto.EventDto;
 import com.distrise.nostr.nostrgateway.jpa.EventRepository;
@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-class EventService {
+public class EventService {
 
   private final EventRepository repository;
 
   @Transactional(readOnly = true)
-  Page<EventDto> query(Pageable pageable) {
+  public Page<EventDto> query(Pageable pageable) {
     return repository.findAll(pageable).map(this::mapper);
   }
 

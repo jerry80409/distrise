@@ -3,8 +3,10 @@ package com.distrise.nostr.nostrgateway.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.stereotype.Service;
 
+// tood - checked existing
 /**
  * Dynamic created RabbitMQ resource.
  */
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Service;
 public class RabbitMqManager {
 
   private final AmqpAdmin amqpAdmin;
+
+  // private final SimpleMessageListenerContainer container;
 
 
   /**

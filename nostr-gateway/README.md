@@ -20,7 +20,13 @@ export SPRING_PROFILES_ACTIVE=cockroach,rabbitmq,relay
 
 ## Http Endpoint
 ```shell
+# curl Relay message
 curl 'http://localhost:8080/event?size=10&page=0'
+
+# dynamic subscribed Relay
+curl -XPOST 'http://localhost:8080/relay' \
+  -H 'Content-Type: application/json' \
+  -d '{"url": "ws://localhost:8888/relay", "subscribedId": "6A657272796C6169737562736372696274696F6E644964"}' 
 ```
 
 ## Demo

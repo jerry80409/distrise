@@ -4,6 +4,7 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 
 import com.distrise.nostr.nostrgateway.http.dto.EventDto;
 import com.distrise.nostr.nostrgateway.http.dto.EventQuery;
+import com.distrise.nostr.nostrgateway.service.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

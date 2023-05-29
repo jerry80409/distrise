@@ -1,4 +1,4 @@
-package com.distrise.nostr.nostrgateway.runner;
+package com.distrise.nostr.nostrgateway.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

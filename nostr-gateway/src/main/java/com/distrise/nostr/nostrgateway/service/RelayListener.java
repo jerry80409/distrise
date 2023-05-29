@@ -1,6 +1,5 @@
-package com.distrise.nostr.nostrgateway.runner;
+package com.distrise.nostr.nostrgateway.service;
 
-import com.distrise.nostr.nostrgateway.config.RabbitMqConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;
@@ -9,15 +8,19 @@ import okhttp3.WebSocketListener;
 import okio.ByteString;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.DirectExchange;
 
 @Slf4j
-@Component
 @RequiredArgsConstructor
 public class RelayListener extends WebSocketListener {
 
-  private final RabbitTemplate rabbitClient;
+  private final AmqpTemplate rabbitClient;
+
+  private final DirectExchange exchange;
+
+  private final Binding binding;
 
   @Override
   public void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
@@ -44,7 +47,7 @@ public class RelayListener extends WebSocketListener {
   @Override
   public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
     log.info("Websocket [Relay: {}] on text message: {}", webSocket.request().url(), text);
-    rabbitClient.convertAndSend(RabbitMqConfig.RELAY_EXCHANGE, RabbitMqConfig.RELAY_BINDING, text);
+    rabbitClient.convertAndSend(exchange.getName(), binding.getRoutingKey(), text);
   }
 
   @Override
