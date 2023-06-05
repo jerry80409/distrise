@@ -1,6 +1,7 @@
 package com.distrise.nostr.nostrrelay.relay.config;
 
 import com.distrise.nostr.nostrrelay.relay.handler.CloseMessageHandler;
+import com.distrise.nostr.nostrrelay.relay.handler.ErrorMessageHandler;
 import com.distrise.nostr.nostrrelay.relay.handler.EventMessageHandler;
 import com.distrise.nostr.nostrrelay.relay.handler.ReqMessageHandler;
 import com.google.gson.JsonArray;
@@ -20,6 +21,9 @@ public class RelayHandler implements WebSocketHandler {
   private final ReqMessageHandler reqMessageHandler;
 
   private final CloseMessageHandler closeMessageHandler;
+
+  private final ErrorMessageHandler errorMessageHandler;
+
 
   @Override
   public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -43,7 +47,7 @@ public class RelayHandler implements WebSocketHandler {
       case "EVENT" -> eventMessageHandler.handler(session, jsonArray.get(1));
       case "REQ" -> reqMessageHandler.handler(session, jsonArray.get(1).getAsString());
       case "CLOSE" -> closeMessageHandler.handler(session, jsonArray.get(1).getAsString());
-      default -> throw new UnsupportedOperationException("Unsupported type: " + type);
+      default -> errorMessageHandler.handler(session, String.format("Unsupported type: %s", type));
     }
   }
 

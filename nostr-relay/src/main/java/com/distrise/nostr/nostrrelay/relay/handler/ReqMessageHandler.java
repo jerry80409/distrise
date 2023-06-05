@@ -4,6 +4,7 @@ import com.distrise.nostr.event.Event;
 import com.distrise.nostr.nostrrelay.jpa.EventRepository;
 import com.distrise.nostr.nostrrelay.relay.exception.RelayException;
 import com.distrise.nostr.relay.message.EndOfStoredEvent;
+import com.distrise.nostr.relay.message.EventMessage;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +38,8 @@ public class ReqMessageHandler implements MessageHandler {
         .createdAt(event.getCreatedAt()).content(event.getContent()).kind(1).tags(List.of()).build();
 
       // reply format ['EVENT', 'subscription', {event payload}]
-      final String json = gson.toJson(List.of("EVENT", subscriptionId, relayEvent));
+      final String json = gson.toJson(EventMessage.builder().subscriptionId(subscriptionId)
+        .event(relayEvent).build());
 
       try {
         // reply to client and sleep 3's
