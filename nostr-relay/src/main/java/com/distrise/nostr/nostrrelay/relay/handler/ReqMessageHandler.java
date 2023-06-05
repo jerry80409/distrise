@@ -2,6 +2,7 @@ package com.distrise.nostr.nostrrelay.relay.handler;
 
 import com.distrise.nostr.event.Event;
 import com.distrise.nostr.nostrrelay.jpa.EventRepository;
+import com.distrise.nostr.nostrrelay.relay.exception.RelayException;
 import com.distrise.nostr.relay.message.EndOfStoredEvent;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -31,7 +32,6 @@ public class ReqMessageHandler implements MessageHandler {
 
     // streaming select and reply
     eventRepository.findBySubscription(subscriptionId).forEach(event -> {
-      // event payload - id, pubkey, createdAt, content, sig, etc.
       final Event relayEvent = Event.builder().id(ByteString.decodeHex(event.getId()))
         .pubkey(ByteString.decodeHex(event.getPubkey())).sig(ByteString.decodeHex(event.getSig()))
         .createdAt(event.getCreatedAt()).content(event.getContent()).kind(1).tags(List.of()).build();
@@ -45,7 +45,7 @@ public class ReqMessageHandler implements MessageHandler {
         Thread.sleep(3000L);
 
       } catch (InterruptedException | IOException e) {
-        throw new RuntimeException(e);
+        throw new RelayException(e);
       }
     });
   }

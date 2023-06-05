@@ -1,5 +1,6 @@
 package com.distrise.nostr.nostrrelay.relay.config;
 
+import com.distrise.nostr.nostrrelay.relay.handler.CloseMessageHandler;
 import com.distrise.nostr.nostrrelay.relay.handler.EventMessageHandler;
 import com.distrise.nostr.nostrrelay.relay.handler.ReqMessageHandler;
 import com.google.gson.Gson;
@@ -18,11 +19,11 @@ import org.springframework.web.socket.*;
 @RequiredArgsConstructor
 public class RelayHandler implements WebSocketHandler {
 
-  private final Gson gson;
-
   private final EventMessageHandler eventMessageHandler;
 
   private final ReqMessageHandler reqMessageHandler;
+
+  private final CloseMessageHandler closeMessageHandler;
 
   @Override
   public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -45,7 +46,7 @@ public class RelayHandler implements WebSocketHandler {
     switch (type) {
       case "EVENT" -> eventMessageHandler.handler(session, jsonArray.get(1));
       case "REQ" -> reqMessageHandler.handler(session, jsonArray.get(1).getAsString());
-      case "CLOSE" -> session.close(CloseStatus.NORMAL);
+      case "CLOSE" -> closeMessageHandler.handler(session, jsonArray.get(1).getAsString());
       default -> throw new UnsupportedOperationException("Unsupported type: " + type);
     }
   }
