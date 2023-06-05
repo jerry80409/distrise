@@ -39,7 +39,7 @@ public class EventMessageHandler {
     log.info("From pubkey: {}, message: {}", event.pubkey().hex(), event.content());
     eventRepository.save(mapper(event));
 
-    session.sendMessage(new TextMessage(gson.toJson(new EndOfStoredEvent(""))));
+    session.sendMessage(new TextMessage(gson.toJson(new EndOfStoredEvent(properties.getSubscriptionId()))));
   }
 
   private EventEntity mapper(Event source) {
