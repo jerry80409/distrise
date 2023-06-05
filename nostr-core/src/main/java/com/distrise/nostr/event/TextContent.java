@@ -9,6 +9,9 @@ import java.util.List;
 import lombok.Builder;
 import okio.ByteString;
 
+/**
+ * Client text event
+ */
 public class TextContent implements EventContent {
 
   private static final Integer KIND = 1;
@@ -18,18 +21,14 @@ public class TextContent implements EventContent {
   private final List<List<String>> tags;
 
   @Builder
-  public TextContent(String content) {
-    this(content, List.of(List.of()));
-  }
-
-  @Builder
   public TextContent(String content, List<List<String>> tags) {
     this.content = content;
     this.tags = tags;
   }
 
   /**
-   * follow NIP-01: https://github.com/nostr-protocol/nips/blob/master/01.md
+   * follow <a href="https://github.com/nostr-protocol/nips/blob/master/01.md">NIP-01</a>
+   * <p>
    * sign and transfer to Event
    */
   @Override
@@ -39,7 +38,7 @@ public class TextContent implements EventContent {
     final String tagsJson = GSON.toJson(tags);
     final List<Serializable> eventId = List.of(
       0, secKey.pubkey().hex(), timestamp, KIND, tagsJson, contentJson);
-    final ByteString id = ByteString.of(GSON.toJson(eventId).getBytes(UTF_8)).sha256();
+    final ByteString id = ByteString.encodeString(GSON.toJson(eventId), UTF_8).sha256();
     final ByteString sig = secKey.sign(id);
 
     return Event.builder().id(id).createdAt(timestamp).kind(KIND).pubkey(secKey.pubkey().key())
