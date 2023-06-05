@@ -1,7 +1,5 @@
 package com.distrise.nostr.crypto;
 
-import com.distrise.nostr.crypto.bech32.Bech32;
-import com.distrise.nostr.crypto.bech32.Bech32.Encoding;
 import com.distrise.nostr.crypto.bech32.Bech32Prefix;
 import fr.acinq.secp256k1.Secp256k1;
 import java.util.Arrays;
@@ -23,8 +21,9 @@ public record SecKey(ByteString key) implements Key {
    * @return
    */
   public PubKey pubkey() {
-    return new PubKey(ByteString.of(Arrays.copyOfRange(Secp256k1.Companion.pubKeyCompress(
-      Secp256k1.Companion.pubkeyCreate(key.toByteArray())), 1, 33)));
+    return new PubKey(ByteString.of(
+      Arrays.copyOfRange(Secp256k1.Companion.pubKeyCompress(Secp256k1.Companion.pubkeyCreate(key.toByteArray())), 1,
+        33)));
   }
 
   /**
@@ -43,8 +42,8 @@ public record SecKey(ByteString key) implements Key {
    * @return
    */
   @Override
-  public String encoded() {
-    return Bech32.encode(Encoding.BECH32, Bech32Prefix.NSEC.getCode(), key.toByteArray());
+  public Bech32Prefix encoded() {
+    return Bech32Prefix.NSEC;
   }
 
   /**

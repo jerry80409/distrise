@@ -1,16 +1,18 @@
 package com.distrise.nostr.crypto;
 
+import com.distrise.nostr.crypto.bech32.Bech32Prefix;
+
 /**
  * Key interface
  */
 public interface Key {
 
   /**
-   * encoded
+   * Bech32 encoded
    *
-   * @return
+   * @return Bech32Prefix
    */
-  String encoded();
+  Bech32Prefix encoded();
 
   /**
    * For human reading.

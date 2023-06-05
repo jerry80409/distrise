@@ -1,5 +1,8 @@
 package com.distrise.nostr.crypto.bech32;
 
+/**
+ * Ref from <a href="https://github.com/tcheeric/nostr-java">https://github.com/tcheeric/nostr-java</a>
+ */
 public enum Bech32Prefix {
   NPUB("npub", "public keys"),
   NSEC("nsec", "private keys"),

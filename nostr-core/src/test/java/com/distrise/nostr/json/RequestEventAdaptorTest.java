@@ -1,10 +1,7 @@
 package com.distrise.nostr.json;
 
 import com.distrise.nostr.event.Event;
-import com.distrise.nostr.relay.message.EndOfStoredEvent;
-import com.distrise.nostr.relay.message.EventMessage;
-import com.distrise.nostr.relay.message.RelayMessage;
-import com.distrise.nostr.relay.message.RequestEvent;
+import com.distrise.nostr.relay.message.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
@@ -17,6 +14,7 @@ class RequestEventAdaptorTest {
   private final Gson gson = new GsonBuilder()
     .registerTypeAdapter(ByteString.class, new HexByteStringAdaptor())
     .registerTypeAdapter(EndOfStoredEvent.class, new EndOfStoreEventAdaptor())
+    .registerTypeAdapter(NoticeMessageAdaptor.class, new NoticeMessageAdaptor())
     .registerTypeAdapter(EventMessage.class, new EventMessageAdaptor())
     .registerTypeAdapter(RequestEvent.class, new RequestEventAdaptor())
     .registerTypeAdapter(RelayMessage.class, new RelayMessageAdaptor())
@@ -28,6 +26,14 @@ class RequestEventAdaptorTest {
     final EndOfStoredEvent endOfStoredEvent = gson.fromJson(json, EndOfStoredEvent.class);
     final String verifyJson = gson.toJson(endOfStoredEvent);
     Assertions.assertThat(verifyJson).isEqualTo(json);
+  }
+
+  @Test
+  void notice_serialize_and_deserialize() {
+    final Notice notice = new Notice("oops");
+    final String json = gson.toJson(notice);
+    final Notice act = gson.fromJson(json, Notice.class);
+    Assertions.assertThat(act).isEqualTo(notice);
   }
 
   @Test

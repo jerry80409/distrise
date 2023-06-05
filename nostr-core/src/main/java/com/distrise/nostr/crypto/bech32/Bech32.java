@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Ref from <a href="https://github.com/tcheeric/nostr-java">https://github.com/tcheeric/nostr-java</a>
+ */
 public class Bech32 {
 
   /**
@@ -196,7 +199,7 @@ public class Bech32 {
    */
   private static byte[] expandHrp(final String hrp) {
     int hrpLength = hrp.length();
-    byte ret[] = new byte[hrpLength * 2 + 1];
+    byte[] ret = new byte[hrpLength * 2 + 1];
     for (int i = 0; i < hrpLength; ++i) {
       int c = hrp.charAt(i) & 0x7f; // Limit to standard 7-bit ASCII
       ret[i] = (byte) ((c >>> 5) & 0x07);
@@ -246,8 +249,8 @@ public class Bech32 {
     int acc = 0;
     int bits = 0;
     List<Byte> result = new ArrayList<>();
-    for (int i = 0; i < data.length; i++) {
-      int value = (data[i] & 0xff) & ((1 << fromWidth) - 1);
+    for (byte datum : data) {
+      int value = (datum & 0xff) & ((1 << fromWidth) - 1);
       acc = (acc << fromWidth) | value;
       bits += fromWidth;
       while (bits >= toWidth) {
