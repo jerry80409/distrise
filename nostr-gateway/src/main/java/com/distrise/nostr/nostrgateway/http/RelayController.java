@@ -50,7 +50,7 @@ public class RelayController {
     final RelayListener relayListener = new RelayListener(amqpTemplate, exchange, binding);
 
     // relay subscribe
-    final RelayClient relayClient = RelayClient.builder().url(relayInfo.getUrl()).listener(relayListener).build();
+    final RelayClient relayClient = RelayClient.builder().url(relayInfo.getUrl()).callback(relayListener).build();
     relayClient.subscribe(new Subscription(relayInfo.getSubscribedId()));
     log.info("Subscribed Relay({}) / {}", relayInfo.getUrl(), relayInfo.getSubscribedId());
   }
